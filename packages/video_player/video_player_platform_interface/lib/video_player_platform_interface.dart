@@ -217,6 +217,7 @@ class VideoEvent {
     this.size,
     this.rotationCorrection,
     this.buffered,
+    this.rotation,
     this.isPlaying,
   });
 
@@ -248,6 +249,8 @@ class VideoEvent {
   /// Only used if [eventType] is [VideoEventType.isPlayingStateUpdate].
   final bool? isPlaying;
 
+  final int? rotation;
+
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
@@ -257,6 +260,7 @@ class VideoEvent {
             duration == other.duration &&
             size == other.size &&
             rotationCorrection == other.rotationCorrection &&
+            rotation == other.rotation &&
             listEquals(buffered, other.buffered) &&
             isPlaying == other.isPlaying;
   }
@@ -268,6 +272,7 @@ class VideoEvent {
         size,
         rotationCorrection,
         buffered,
+        rotation,
         isPlaying,
       );
 }

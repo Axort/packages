@@ -50,6 +50,7 @@ class VideoPlayerValue {
     this.isBuffering = false,
     this.volume = 1.0,
     this.playbackSpeed = 1.0,
+    this.rotation = 0,
     this.rotationCorrection = 0,
     this.errorDescription,
     this.isCompleted = false,
@@ -127,6 +128,9 @@ class VideoPlayerValue {
   /// Indicates whether or not the video has been loaded and is ready to play.
   final bool isInitialized;
 
+  /// The rotation of the video.
+  final int rotation;
+
   /// Indicates whether or not the video is in an error state. If this is true
   /// [errorDescription] should have information about the problem.
   bool get hasError => errorDescription != null;
@@ -164,6 +168,7 @@ class VideoPlayerValue {
     double? volume,
     double? playbackSpeed,
     int? rotationCorrection,
+    int? rotation,
     String? errorDescription = _defaultErrorDescription,
     bool? isCompleted,
   }) {
@@ -179,6 +184,7 @@ class VideoPlayerValue {
       isLooping: isLooping ?? this.isLooping,
       isBuffering: isBuffering ?? this.isBuffering,
       volume: volume ?? this.volume,
+      rotation: rotation ?? this.rotation,
       playbackSpeed: playbackSpeed ?? this.playbackSpeed,
       rotationCorrection: rotationCorrection ?? this.rotationCorrection,
       errorDescription: errorDescription != _defaultErrorDescription
@@ -202,6 +208,7 @@ class VideoPlayerValue {
         'isLooping: $isLooping, '
         'isBuffering: $isBuffering, '
         'volume: $volume, '
+        'rotation: $rotation, ',
         'playbackSpeed: $playbackSpeed, '
         'errorDescription: $errorDescription, '
         'isCompleted: $isCompleted),';
@@ -450,6 +457,7 @@ class VideoPlayerController extends ValueNotifier<VideoPlayerValue> {
           value = value.copyWith(
             duration: event.duration,
             size: event.size,
+            rotation: event.rotation,
             rotationCorrection: event.rotationCorrection,
             isInitialized: event.duration != null,
             errorDescription: null,
